@@ -34,7 +34,7 @@ export default function HeroBanner({
         </h1>
 
         <p className="mt-4 sm:mt-6 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto font-normal leading-relaxed">
-          Order genuine Sivakasi crackers directly to your doorstep. Standard low-smoke green crackers, child-safe sparklers, and spectacular sky shots.
+          Order genuine Sivakasi crackers online and collect your packed box at our store counter. Certified low-smoke green fireworks and family celebration packs.
         </p>
 
         {/* Search bar & quick action */}

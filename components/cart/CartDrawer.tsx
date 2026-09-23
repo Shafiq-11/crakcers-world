@@ -67,17 +67,14 @@ export default function CartDrawer() {
             </button>
           </div>
 
-          {/* Free delivery progress */}
-          <div className="px-6 py-3 bg-primary-50 border-b border-primary-100">
-            {remainingForFreeShipping > 0 ? (
-              <p className="text-xs text-primary-900 font-medium">
-                Add <span className="font-bold text-primary-700">{formatPrice(remainingForFreeShipping)}</span> more for <span className="underline font-bold">FREE Festive Delivery</span>!
-              </p>
-            ) : (
-              <p className="text-xs text-green-700 font-bold flex items-center gap-1.5">
-                <span>🎉</span> You unlocked FREE Festive Delivery across India!
-              </p>
-            )}
+          {/* Store Pickup Banner */}
+          <div className="px-6 py-3 bg-purple-50/70 border-b border-purple-100 flex items-center justify-between text-xs">
+            <span className="text-primary-900 font-semibold flex items-center gap-1.5">
+              <span>🏬</span> In-Store Pickup (Sivakasi Outlet)
+            </span>
+            <span className="font-extrabold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
+              FREE PICKUP
+            </span>
           </div>
 
           {/* Cart Item List */}
@@ -161,8 +158,8 @@ export default function CartDrawer() {
                   {formatPrice(subtotalPaise)}
                 </span>
               </div>
-              <p className="text-xs text-gray-400">
-                Taxes and standard delivery calculated at checkout.
+              <p className="text-xs text-gray-500">
+                Ready for immediate packing and counter collection.
               </p>
 
               <div className="grid grid-cols-2 gap-3">

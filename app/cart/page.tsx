@@ -33,8 +33,8 @@ export default function CartPage() {
   }
 
   const subtotalPaise = getTotalPaise()
-  const shippingPaise = subtotalPaise >= 199900 || subtotalPaise === 0 ? 0 : 15000 // Free over ₹1,999, else ₹150
-  const grandTotalPaise = subtotalPaise + shippingPaise
+  const shippingPaise = 0
+  const grandTotalPaise = subtotalPaise
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -160,19 +160,12 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex justify-between text-gray-600">
-                    <span>Festive Delivery</span>
-                    {shippingPaise === 0 ? (
-                      <span className="font-bold text-emerald-600">FREE</span>
-                    ) : (
-                      <span className="font-semibold text-gray-900">{formatPrice(shippingPaise)}</span>
-                    )}
+                    <span>Store Counter Pickup</span>
+                    <span className="font-bold text-emerald-600">FREE</span>
                   </div>
-
-                  {shippingPaise > 0 && (
-                    <p className="text-xs text-primary-700 bg-primary-50 p-2.5 rounded-lg font-medium">
-                      Add {formatPrice(199900 - subtotalPaise)} more to qualify for Free Delivery!
-                    </p>
-                  )}
+                  <p className="text-[11px] text-gray-400 bg-purple-50/70 p-2.5 rounded-lg">
+                    🏬 Pay online and collect your packed box at our Sivakasi counter.
+                  </p>
                 </div>
 
                 <div className="py-4 flex justify-between items-center">

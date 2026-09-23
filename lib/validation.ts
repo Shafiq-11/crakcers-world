@@ -16,9 +16,9 @@ export const checkoutSchema = z.object({
     .max(254, 'Email is too long'),
   deliveryAddress: z
     .string()
-    .min(10, 'Address must be at least 10 characters')
-    .max(500, 'Address must be at most 500 characters')
-    .trim(),
+    .max(500)
+    .optional()
+    .default('Store Pickup - Counter Collection (Diwali Kadai Outlet)'),
   items: z
     .array(
       z.object({

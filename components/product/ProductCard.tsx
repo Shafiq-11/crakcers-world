@@ -17,6 +17,8 @@ export interface ProductData {
 
 export default function ProductCard({ product }: { product: ProductData }) {
   const [justAdded, setJustAdded] = useState(false)
+  const [showFlyingEffect, setShowFlyingEffect] = useState(false)
+
   const addItem = useCartStore((s) => s.addItem)
   const items = useCartStore((s) => s.items)
 
@@ -27,15 +29,31 @@ export default function ProductCard({ product }: { product: ProductData }) {
 
   const handleAddToCart = () => {
     if (isOutOfStock) return
+
+    // Trigger card flying effect animation
+    setShowFlyingEffect(true)
     const success = addItem(product, 1)
+
     if (success) {
       setJustAdded(true)
-      setTimeout(() => setJustAdded(false), 1200)
+      setTimeout(() => {
+        setJustAdded(false)
+        setShowFlyingEffect(false)
+      }, 1000)
     }
   }
 
   return (
     <div className="group relative bg-white rounded-2xl border border-gray-100 hover:border-primary-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:glow-purple transition-all duration-300 flex flex-col overflow-hidden">
+      {/* Flying Particle Effect on Add */}
+      {showFlyingEffect && (
+        <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-primary-600/90 text-white flex items-center justify-center text-sm font-black shadow-lg shadow-purple-400 -translate-y-24 scale-75 opacity-0 transition-all duration-700 ease-out">
+            +1
+          </div>
+        </div>
+      )}
+
       {/* Product Image & Badges */}
       <div className="relative aspect-4/3 w-full bg-gray-50 overflow-hidden">
         <img
@@ -69,20 +87,20 @@ export default function ProductCard({ product }: { product: ProductData }) {
       </div>
 
       {/* Card Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
           <h3 className="font-bold text-gray-900 text-base leading-snug group-hover:text-primary-600 transition-colors line-clamp-1">
             {product.name}
           </h3>
-          <p className="mt-1.5 text-xs text-gray-500 line-clamp-2 leading-relaxed">
+          <p className="mt-1 text-xs text-gray-500 line-clamp-2 leading-relaxed">
             {product.description}
           </p>
         </div>
 
-        <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+        <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">
           <div>
-            <span className="text-[11px] uppercase tracking-wider text-gray-400 font-semibold block">Price</span>
-            <span className="text-xl font-bold text-gray-900">
+            <span className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold block">Price</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900">
               {formatPrice(product.price)}
             </span>
           </div>
@@ -90,20 +108,20 @@ export default function ProductCard({ product }: { product: ProductData }) {
           <button
             disabled={isOutOfStock || inCartQty >= product.stockQuantity}
             onClick={handleAddToCart}
-            className={`px-4 py-2.5 rounded-xl font-semibold text-xs tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
+            className={`px-3.5 sm:px-4 py-2.5 rounded-xl font-bold text-xs tracking-wide transition-all duration-200 flex items-center gap-1.5 cursor-pointer min-h-[42px] ${
               isOutOfStock
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200'
                 : inCartQty >= product.stockQuantity
                 ? 'bg-gray-100 text-gray-500 cursor-not-allowed border border-gray-200'
                 : justAdded
-                ? 'bg-green-600 text-white shadow-md shadow-green-200 scale-95'
-                : 'bg-primary-600 hover:bg-primary-700 text-white glow-purple hover:scale-[1.02] active:scale-95'
+                ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200 scale-95'
+                : 'bg-primary-600 hover:bg-primary-700 text-white glow-purple active:scale-95'
             }`}
           >
             {isOutOfStock ? (
-              'Unavailable'
+              'Sold Out'
             ) : inCartQty >= product.stockQuantity ? (
-              `Max (${inCartQty}) in Cart`
+              `Max (${inCartQty})`
             ) : justAdded ? (
               <>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

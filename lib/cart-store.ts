@@ -16,6 +16,8 @@ export interface CartItem {
 interface CartStore {
   items: CartItem[]
   isDrawerOpen: boolean
+  lastAddedId: string | null
+  lastAddedTimestamp: number
   setDrawerOpen: (open: boolean) => void
   addItem: (product: {
     id: string
@@ -37,6 +39,8 @@ export const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
       isDrawerOpen: false,
+      lastAddedId: null,
+      lastAddedTimestamp: 0,
 
       setDrawerOpen: (open) => set({ isDrawerOpen: open }),
 
@@ -59,7 +63,12 @@ export const useCartStore = create<CartStore>()(
             quantity: finalQty,
             stockQuantity: product.stockQuantity,
           }
-          set({ items: updated, isDrawerOpen: true })
+          // Do NOT auto open drawer so user can keep shopping uninterrupted
+          set({
+            items: updated,
+            lastAddedId: product.id,
+            lastAddedTimestamp: Date.now(),
+          })
         } else {
           set({
             items: [
@@ -74,7 +83,9 @@ export const useCartStore = create<CartStore>()(
                 category: product.category,
               },
             ],
-            isDrawerOpen: true,
+            // Do NOT auto open drawer
+            lastAddedId: product.id,
+            lastAddedTimestamp: Date.now(),
           })
         }
         return true

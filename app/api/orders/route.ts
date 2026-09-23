@@ -109,9 +109,9 @@ export async function POST(request: Request) {
       })
     }
 
-    // Shipping calculation (free over ₹1,999, else ₹150 = 15000 paise)
-    const shippingPaise = calculatedItemsTotal >= 199900 ? 0 : 15000
-    const grandTotalPaise = calculatedItemsTotal + shippingPaise
+    // In-store pickup: no shipping fee
+    const shippingPaise = 0
+    const grandTotalPaise = calculatedItemsTotal
     const orderNumber = generateOrderNumber()
 
     // 4. Create Order & OrderItems in DB with paymentStatus = PENDING
