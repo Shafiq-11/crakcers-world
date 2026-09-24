@@ -80,9 +80,9 @@ export default function ProductCatalog({
       />
 
       {/* Main Catalog Container */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-2 sm:pt-4">
+      <div className="max-w-7xl mx-auto px-1.5 sm:px-6 lg:px-8 pt-1 sm:pt-4">
         {/* Category Scroll Strip */}
-        <div className="sticky top-16 sm:top-20 z-20 bg-white/95 backdrop-blur-md py-2.5 border-b border-gray-100/90 shadow-2xs">
+        <div className="sticky top-14 sm:top-18 z-20 bg-white/95 backdrop-blur-md py-1.5 sm:py-2.5 border-b border-gray-100/90 shadow-2xs">
           <CategoryFilter
             selectedCategory={selectedCategory}
             onSelectCategory={(cat) => setSelectedCategory(cat)}
@@ -90,22 +90,22 @@ export default function ProductCatalog({
         </div>
 
         {/* Section Header & Sort */}
-        <div className="flex items-center justify-between gap-3 pt-4 pb-2">
-          <div className="flex items-center gap-2">
-            <h2 className="text-base sm:text-lg font-black text-gray-900 tracking-tight">
+        <div className="flex items-center justify-between gap-2 pt-2.5 pb-1 px-1">
+          <div className="flex items-center gap-1.5">
+            <h2 className="text-xs sm:text-base font-black text-gray-900 tracking-tight">
               {currentCategoryTitle}
             </h2>
-            <span className="text-[11px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+            <span className="text-[10px] font-bold text-gray-500 bg-gray-100 px-1.5 py-0.2 rounded-full">
               {sortedProducts.length}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
-            <span className="text-[11px] text-gray-400 font-semibold hidden sm:inline">Sort:</span>
+          <div className="flex items-center gap-1">
+            <span className="text-[10px] text-gray-400 font-semibold hidden sm:inline">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="text-xs font-bold bg-white border border-gray-200 rounded-xl px-2.5 py-1.5 text-gray-700 focus:outline-none focus:border-primary-500 cursor-pointer shadow-2xs"
+              className="text-[11px] sm:text-xs font-bold bg-white border border-gray-200 rounded-lg px-2 py-1 text-gray-700 focus:outline-none focus:border-primary-500 cursor-pointer shadow-2xs"
             >
               <option value="featured">Featured</option>
               <option value="price-asc">Price: Low to High</option>
@@ -114,7 +114,7 @@ export default function ProductCatalog({
           </div>
         </div>
 
-        {/* Product Grid (Blinkit 2-column mobile layout) */}
+        {/* Product Grid (High-Density 3-Column Mobile Layout) */}
         {sortedProducts.length === 0 ? (
           <div className="py-16 text-center bg-white rounded-2xl border border-gray-100 mt-4 p-8">
             <div className="w-14 h-14 bg-purple-50 rounded-full flex items-center justify-center mx-auto text-2xl mb-3">
@@ -135,7 +135,7 @@ export default function ProductCatalog({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4 mt-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-1.5 sm:gap-3 mt-1.5">
             {sortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

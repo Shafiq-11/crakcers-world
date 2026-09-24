@@ -11,19 +11,19 @@ export default function HeroBanner({
   onSearchChange,
 }: HeroBannerProps) {
   return (
-    <section className="bg-white border-b border-gray-100 pb-3 pt-3 sm:pt-6 sm:pb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Prominent Quick-Commerce Search Bar */}
-        <div className="relative w-full max-w-2xl mx-auto mb-3 sm:mb-4">
+    <section className="bg-white border-b border-gray-100 pb-2 pt-2 sm:pt-4 sm:pb-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        {/* Quick-Commerce Search Bar */}
+        <div className="relative w-full max-w-2xl mx-auto mb-2 sm:mb-3">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder='Search "sparklers", "flowerpots", "rockets"...'
-            className="w-full pl-11 pr-10 py-3 sm:py-3.5 text-xs sm:text-sm bg-gray-50/90 border border-gray-200/80 rounded-2xl shadow-2xs focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all text-gray-900 placeholder:text-gray-400 font-medium"
+            className="w-full pl-9 sm:pl-11 pr-8 py-2 sm:py-3 text-xs sm:text-sm bg-gray-50/90 border border-gray-200/80 rounded-xl shadow-2xs focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all text-gray-900 placeholder:text-gray-400 font-medium"
           />
           <svg
-            className="absolute left-3.5 top-3.5 sm:top-4 w-4 h-4 sm:w-5 sm:h-5 text-gray-400"
+            className="absolute left-3 top-2.5 sm:top-3.5 w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -38,36 +38,31 @@ export default function HeroBanner({
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3.5 top-3 sm:top-3.5 text-xs text-gray-400 hover:text-gray-600 p-1"
+              className="absolute right-2.5 top-2 sm:top-2.5 text-xs text-gray-400 hover:text-gray-600 p-1"
             >
               ✕
             </button>
           )}
         </div>
 
-        {/* Compact Blinkit Festive Promo Card */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-700 via-primary-600 to-purple-800 p-4 sm:p-6 text-white shadow-md">
-          {/* Subtle background glow */}
-          <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-xl pointer-events-none" />
-
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
-            <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-extrabold uppercase tracking-wider text-purple-100 mb-1.5">
-                <span>⚡</span>
-                <span>Fast Counter Pickup • 15 Mins</span>
+        {/* Festive Promo Card (Slim on mobile so products stay in frame) */}
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-700 via-primary-600 to-purple-800 p-2 sm:p-5 text-white shadow-xs">
+          <div className="flex items-center justify-between gap-2 relative z-10">
+            <div className="flex items-center gap-2">
+              <span className="text-base sm:text-2xl">🎆</span>
+              <div>
+                <p className="text-xs sm:text-base font-black tracking-tight leading-tight">
+                  Diwali 2026 Sivakasi Direct Factory Prices
+                </p>
+                <p className="text-[10px] sm:text-xs text-purple-100 hidden sm:block mt-0.5">
+                  100% Certified Green Crackers • Pay Online & Collect at Store Counter
+                </p>
               </div>
-              <h2 className="text-lg sm:text-2xl font-black tracking-tight leading-tight">
-                Diwali 2026 Sivakasi Fireworks 🎆
-              </h2>
-              <p className="text-xs sm:text-sm text-purple-100/90 mt-0.5 font-medium">
-                100% Certified Green Crackers • Factory Wholesale Prices
-              </p>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold bg-white/15 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 self-start sm:self-auto">
-              <span>🏬</span>
-              <span>Pay Online & Pick Up Ready Box</span>
-            </div>
+            <span className="text-[10px] font-extrabold bg-white/20 px-2 py-0.5 rounded-md whitespace-nowrap">
+              ⚡ 15m Pickup
+            </span>
           </div>
         </div>
       </div>
