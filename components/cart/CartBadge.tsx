@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useCartStore } from '@/lib/cart-store'
 
 export default function CartBadge() {
@@ -8,7 +9,6 @@ export default function CartBadge() {
   const [isBumping, setIsBumping] = useState(false)
 
   const items = useCartStore((s) => s.items)
-  const setDrawerOpen = useCartStore((s) => s.setDrawerOpen)
   const lastAddedTimestamp = useCartStore((s) => s.lastAddedTimestamp)
 
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function CartBadge() {
   const totalItems = mounted ? items.reduce((sum, item) => sum + item.quantity, 0) : 0
 
   return (
-    <button
+    <Link
       id="header-cart-btn"
-      onClick={() => setDrawerOpen(true)}
-      aria-label="Open Shopping Cart"
+      href="/cart"
+      aria-label="View Shopping Cart"
       className={`relative flex items-center gap-2 px-3 sm:px-4 py-2 rounded-2xl border transition-all duration-200 text-gray-800 bg-white shadow-2xs cursor-pointer ${
         isBumping
           ? 'scale-105 border-primary-500 shadow-md shadow-purple-200 ring-2 ring-primary-300'
@@ -71,7 +71,7 @@ export default function CartBadge() {
           {totalItems}
         </span>
       )}
-    </button>
+    </Link>
   )
 }
 
