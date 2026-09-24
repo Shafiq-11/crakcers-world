@@ -34,15 +34,50 @@ export default function ProductCard({ product }: { product: ProductData }) {
   const packInfo = packMatch ? packMatch[1] : '1 Unit'
   const cleanTitle = product.name.replace(/\(.*?\)/, '').trim()
 
-  const handleAdd = () => {
+  const triggerFlyAnimation = (targetEl?: HTMLElement) => {
+    if (typeof window === 'undefined' || !targetEl) return
+    const targetCart = document.getElementById('header-cart-btn')
+    if (!targetCart) return
+
+    const sourceRect = targetEl.getBoundingClientRect()
+    const cartRect = targetCart.getBoundingClientRect()
+
+    const flyingEl = document.createElement('div')
+    flyingEl.innerText = '✨'
+    flyingEl.style.position = 'fixed'
+    flyingEl.style.left = `${sourceRect.left + sourceRect.width / 2}px`
+    flyingEl.style.top = `${sourceRect.top}px`
+    flyingEl.style.zIndex = '9999'
+    flyingEl.style.pointerEvents = 'none'
+    flyingEl.style.fontSize = '20px'
+    flyingEl.style.transition = 'all 0.55s cubic-bezier(0.2, 0.9, 0.3, 1)'
+    flyingEl.style.transform = 'translate(-50%, -50%) scale(1.4)'
+    flyingEl.style.filter = 'drop-shadow(0 0 6px #9333ea)'
+    document.body.appendChild(flyingEl)
+
+    requestAnimationFrame(() => {
+      flyingEl.style.left = `${cartRect.left + cartRect.width / 2}px`
+      flyingEl.style.top = `${cartRect.top + cartRect.height / 2}px`
+      flyingEl.style.transform = 'translate(-50%, -50%) scale(0.3)'
+      flyingEl.style.opacity = '0'
+    })
+
+    setTimeout(() => {
+      flyingEl.remove()
+    }, 600)
+  }
+
+  const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isOutOfStock) return
+    triggerFlyAnimation(e.currentTarget)
     setIsBumping(true)
     addItem(product, 1)
     setTimeout(() => setIsBumping(false), 300)
   }
 
-  const handleIncrement = () => {
+  const handleIncrement = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (inCartQty >= product.stockQuantity) return
+    triggerFlyAnimation(e.currentTarget)
     setIsBumping(true)
     updateQuantity(product.id, inCartQty + 1)
     setTimeout(() => setIsBumping(false), 300)
